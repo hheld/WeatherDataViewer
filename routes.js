@@ -8,6 +8,7 @@ router.get('/', function(req, res) {
     res.json({ message: 'Welcome to our api!'});
 });
 
+/* /api/inHumidity?from=2014-08-21T00:00:00&to=2014-08-25T15:45:12 */
 router.get('/inHumidity', function(req, res) {
     var from = Date.parse(req.query.from)/1000 || 0x00000000,
         to   = Date.parse(req.query.to)/1000   || 0x7FFFFFFF;
