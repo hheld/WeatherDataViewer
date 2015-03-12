@@ -1,12 +1,15 @@
 /* jshint node: true */
 
-var weatherDbHandler = require('./weatherDbHandler'),
-    timePoints,
-    inHumidityData;
+var express     = require('express'),
+    app         = express(),
+    bodyParser  = require('body-parser'),
+    port        = process.env.PORT || 8080,
+    routes      = require('./routes');
 
-weatherDbHandler.inHumidity(function(timePoint, inHumidity) {
-    timePoints = timePoint;
-    inHumidityData = inHumidity;
-    
-    console.log(timePoints);
-});
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use('/api', routes);
+
+app.listen(port);
+console.log('Started server on port ' + port);
