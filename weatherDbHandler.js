@@ -5,7 +5,7 @@ var sqlite3 = require('sqlite3'),
 
 exports.inHumidity = function(from, to, callback) {
     if(typeof(callback)!=='function') {
-        callback('No callback function given!', [], []);
+        return new Error('No callback function given!');
     }
 
     db.serialize(function() {
