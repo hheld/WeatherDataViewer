@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api', routes);
+app.use('/static', express.static(__dirname + '/static/dist'));
 
 app.listen(port);
 console.log('Started server on port ' + port);
