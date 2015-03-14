@@ -23,3 +23,19 @@ exports.inHumidity = function(from, to, callback) {
         });
     });
 };
+
+exports.allColumnNames = function(callback) {
+    if(typeof(callback)!=='function') {
+        return new Error('No callback function given!');
+    }
+
+    db.serialize(function() {
+        var tableNames = [];
+
+        db.each("PRAGMA table_info(archive)", function(err, row) {
+            tableNames.push(row.name);
+        }, function(err, numRows) {
+            callback(err, tableNames);
+        });
+    });
+};

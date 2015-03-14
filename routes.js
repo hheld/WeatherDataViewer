@@ -25,4 +25,14 @@ router.get('/inHumidity', function(req, res) {
     });
 });
 
+router.get('/availableData', function(req, res) {
+    weatherDbHandler.allColumnNames(function(err, availableData) {
+        if(err) {
+            res.json('Something weng wrong for GET /availableData: ' + err);
+        } else {
+            res.json(availableData);
+        }
+    });
+});
+
 module.exports = router;
