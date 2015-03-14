@@ -5,13 +5,19 @@
     <title>Weather data</title>
 </head>
 <body>
-    <h1>Hello</h1>
-
-    <linechart data="data" options="options" mode="" width="800" height="400"></linechart>
+    <plot-widget quantity="'inHumidity'" width="800" height="400"></plot-widget>
 
     <script src="/3rdParty/angular/angular.min.js"></script>
     <script src="/3rdParty/n3-line-chart/build/line-chart.min.js"></script>
     <script src="/3rdParty/d3/d3.min.js"></script>
-    <script src="/static/WeatherData.min.js"></script>
+
+    <!-- only for easier development; to be removed later vvvvvvvvvvvvvvvvvvvvvvv-->
+    <script src="/static/client/app/app.js"></script>
+    <script src="/static/client/app/PlotWidget/PlotWidget.app.js"></script>
+    <script src="/static/client/app/PlotWidget/PlotWidget.controller.js"></script>
+    <script src="/static/client/app/PlotWidget/PlotWidget.directive.js"></script>
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
+
+    <!--<script src="/static/WeatherData.min.js"></script>-->
 </body>
 </html>
