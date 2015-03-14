@@ -4,5 +4,5 @@
     'use strict';
 
     angular.module('plotWidget',
-                   ['n3-line-chart']);
+                   []);
 }());

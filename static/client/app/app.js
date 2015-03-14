@@ -4,6 +4,5 @@
     'use strict';
 
     angular.module('weatherData',
-                  ['n3-line-chart',
-                   'plotWidget']);
+                  ['plotWidget']);
 }());
