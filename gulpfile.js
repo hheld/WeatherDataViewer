@@ -7,7 +7,7 @@ gulp.task('brackets-onsave', ['uglify', 'distributeHtml', 'distributeCss']);
 
 gulp.watch('static/client/**/*.js', ['uglify']);
 gulp.task('uglify', function () {
-    gulp.src(['static/client/**/**/*.js'])
+    gulp.src(['static/client/**/*.js'])
         .pipe(uglify('WeatherData.min.js'))
         .pipe(gulp.dest('static/dist'));
 });
