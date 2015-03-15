@@ -6,22 +6,24 @@
     <link rel="stylesheet" href="/3rdParty/bootstrap/dist/css/bootstrap.min.css" type="text/css">
 </head>
 <body>
-    <plot-widget quantity="'inHumidity'"></plot-widget>
-    <plot-widget quantity="'inTemp'"></plot-widget>
-    <plot-widget quantity="'outTemp'"></plot-widget>
+    <div class="container">
+        <plot-widget class="plotWidget" quantity="'inHumidity'"></plot-widget>
+        <plot-widget class="plotWidget" quantity="'inTemp'"></plot-widget>
+        <plot-widget class="plotWidget" quantity="'outTemp'"></plot-widget>
+    </div>
 
     <script src="/3rdParty/angular/angular.min.js"></script>
     <script src="/3rdParty/dygraphs/dygraph-combined-dev.js"></script>
 
     <!-- only for easier development; to be removed later vvvvvvvvvvvvvvvvvvvvvvv-->
-    <script src="/static/client/app/app.js"></script>
-    <script src="/static/client/app/PlotWidget/PlotWidget.app.js"></script>
-    <script src="/static/client/app/PlotWidget/PlotWidget.controller.js"></script>
-    <script src="/static/client/app/PlotWidget/PlotWidget.directive.js"></script>
-    <script src="/static/client/app/WeatherRestService/WeatherRestService.app.js"></script>
-    <script src="/static/client/app/WeatherRestService/weatherRestService.factory.js"></script>
-    <script src="/static/client/app/UnitService/UnitService.app.js"></script>
-    <script src="/static/client/app/UnitService/unitService.factory.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/PlotWidget/PlotWidget.app.js"></script>
+    <script src="app/PlotWidget/PlotWidget.controller.js"></script>
+    <script src="app/PlotWidget/PlotWidget.directive.js"></script>
+    <script src="app/WeatherRestService/WeatherRestService.app.js"></script>
+    <script src="app/WeatherRestService/weatherRestService.factory.js"></script>
+    <script src="app/UnitService/UnitService.app.js"></script>
+    <script src="app/UnitService/unitService.factory.js"></script>
     <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
 
     <!--<script src="/static/WeatherData.min.js"></script>-->
