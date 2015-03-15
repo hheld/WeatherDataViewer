@@ -12,6 +12,21 @@
     function PlotWidgetController($scope, weatherRestService) {
         var vm = this;
 
+        init();
+
+        // ####################################################################
+
+        function init() {
+            $scope.plotOptions = {
+                showRangeSelector: true,
+                title: $scope.quantity,
+                color: 'rgb(42, 101, 212)',
+                gridLineColor: 'rgb(200, 200, 200)',
+                rangeSelectorPlotFillColor: '#575df5',
+                rangeSelectorPlotStrokeColor: '#676877'
+            };
+        }
+
         weatherRestService.inHumidity('2014-08-30', '2014-08-31')
 //        weatherRestService.inHumidity()
             .then(function(data) {
@@ -24,10 +39,5 @@
             $scope.plotData = newData;
         });
 
-        $scope.plotOptions = {
-            showRangeSelector: true
-        };
-
-        // ####################################################################
     }
 }());
