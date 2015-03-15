@@ -8,6 +8,16 @@ router.get('/', function(req, res) {
     res.json({ message: 'Welcome to our api!'});
 });
 
+router.get('/availableData', function(req, res) {
+    weatherDbHandler.allColumnNames(function(err, availableData) {
+        if(err) {
+            res.json('Something weng wrong for GET /availableData: ' + err);
+        } else {
+            res.json(availableData);
+        }
+    });
+});
+
 /* E.g.: /api/inHumidity?from=2014-08-21T00:00:00&to=2014-08-25T15:45:12 */
 router.get('/*', function(req, res) {
     var from = Date.parse(req.query.from)/1000 || 0x00000000,
@@ -21,16 +31,6 @@ router.get('/*', function(req, res) {
                 timePoints: timePoints,
                 dataPoints: dataPoints
             });
-        }
-    });
-});
-
-router.get('/availableData', function(req, res) {
-    weatherDbHandler.allColumnNames(function(err, availableData) {
-        if(err) {
-            res.json('Something weng wrong for GET /availableData: ' + err);
-        } else {
-            res.json(availableData);
         }
     });
 });
