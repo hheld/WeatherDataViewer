@@ -5,7 +5,7 @@
     "Harald Held <harald.held@gmail.com>"
   ],
   "description": "Provide a nice interface to weather data collected in a weewx database.",
-  "license": "MIT",
+  "license": "ISC",
   "ignore": [
     "**/.*",
     "node_modules",
