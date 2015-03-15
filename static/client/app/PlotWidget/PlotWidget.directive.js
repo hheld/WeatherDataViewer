@@ -1,4 +1,4 @@
-/* global angular, console, Chart */
+/* global angular, console, Dygraph */
 
 (function () {
     'use strict';
@@ -24,25 +24,30 @@
         // ####################################################################
 
         function link(scope, element, attr) {
-            var chartEl = element.find('canvas'),
-                chart;
+            var graphEl = element.find('div'),
+                g;
 
-            if(chartEl) {
-                var ctx = chartEl[0].getContext('2d');
-                chart = new Chart(ctx).Line({}, {});
+            if(graphEl) {
+                g = new Dygraph(graphEl[0], [[0, 0]], {
+                    labels: ['Time', scope.quantity]
+                });
             }
 
             scope.$watch('plotData', function(newData, oldData) {
-                chart.initialize(newData);
-            }, true);
-
-            scope.$watch('plotOptions', function(newData, oldData) {
-                if(chart) {
-                    angular.extend(
-                        chart.plotOptions,
-                        scope.plotOptions
-                    );
+                if(!newData) {
+                    return;
                 }
+
+                var plotOptions = scope.plotOptions;
+
+                if(!plotOptions) {
+                    plotOptions = {};
+                }
+
+                plotOptions.file = scope.plotData;
+
+                g.updateOptions(plotOptions);
+                g.resetZoom();
             }, true);
         }
     }
