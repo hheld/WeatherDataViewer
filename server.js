@@ -10,11 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api', routes);
-//app.use('/static', express.static(__dirname + '/static/dist'));
-
-// only for easier development; won't be needed later
-app.use('/static', express.static(__dirname + '/static'));
-
+app.use('/static', express.static(__dirname + '/static/dist'));
 app.use('/3rdParty', express.static(__dirname + '/bower_components'));
 
 app.listen(port);
