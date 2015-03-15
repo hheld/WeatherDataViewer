@@ -1,7 +1,10 @@
 /* jshint node: true */
 
-var sqlite3 = require('sqlite3'),
-    db = new sqlite3.Database('weewx.sdb');
+var sqlite3         = require('sqlite3'),
+    dbPathPrefix    = process.argv[2] || '.',
+    db              = new sqlite3.Database(dbPathPrefix + '/weewx.sdb');
+
+console.log('prefix: ' + dbPathPrefix);
 
 exports.queryData = function(from, to, datum, callback) {
     if(typeof(callback)!=='function') {
