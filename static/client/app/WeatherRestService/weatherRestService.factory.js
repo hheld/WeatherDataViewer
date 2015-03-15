@@ -12,7 +12,7 @@
     function WeatherRestService ($http) {
         return {
             availableData: availableData,
-            inHumidity: inHumidity
+            data: data
         };
 
         // ####################################################################
@@ -24,8 +24,8 @@
             });
         }
 
-        function inHumidity(from, to) {
-            return $http.get('/api/inHumidity', {
+        function data(from, to, datum) {
+            return $http.get('/api/' + datum, {
                 params: { from: from, to: to}
             })
                 .error(function(data, status, headers, config) {

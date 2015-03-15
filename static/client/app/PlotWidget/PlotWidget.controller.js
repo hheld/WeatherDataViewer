@@ -27,13 +27,13 @@
             };
         }
 
-        weatherRestService.inHumidity('2014-08-30', '2014-08-31')
-//        weatherRestService.inHumidity()
+        weatherRestService.data('2014-08-30', '2014-08-31', $scope.quantity)
+//        weatherRestService.data(null, null, 'inHumidity')
             .then(function(data) {
             var newData = [];
 
             for(var i=0, len=data.data.timePoints.length; i<len; ++i) {
-                newData.push([new Date(data.data.timePoints[i]), data.data.inHumidity[i]]);
+                newData.push([new Date(data.data.timePoints[i]), data.data.dataPoints[i]]);
             }
 
             $scope.plotData = newData;
