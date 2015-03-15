@@ -49,14 +49,10 @@
                 }
 
                 var newData = [],
-                    conversionFunc = function(v) { return v; };
-
-                if(/temp/i.test(quantity)) {
-                    conversionFunc = function(v) { return (v-32)/1.8; };
-                }
+                    conversionFunc = unitService.conversion(quantity);
 
                 for(var i=0, len=data.data.timePoints.length; i<len; ++i) {
-                    newData.push([new Date(data.data.timePoints[i]),    conversionFunc(data.data.dataPoints[i])]);
+                    newData.push([new Date(data.data.timePoints[i]), conversionFunc(data.data.dataPoints[i])]);
                 }
 
                 $scope.plotData = newData;

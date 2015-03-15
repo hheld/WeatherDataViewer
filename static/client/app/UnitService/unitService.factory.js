@@ -11,7 +11,8 @@
 
     function UnitService () {
         return {
-            unit: unit
+            unit: unit,
+            conversion: conversion
         };
 
         // ####################################################################
@@ -24,9 +25,36 @@
                     return '%';
                 case 'outTemp':
                     return '°C';
+                case 'barometer':
+                    return 'mbar';
                 default:
                     return '';
             }
+        }
+
+        function conversion(quantity) {
+            switch(quantity) {
+                case 'inTemp':
+                    return F2C;
+                case 'outTemp':
+                    return F2C;
+                case 'barometer':
+                    return inHg2mbar;
+                default:
+                    return identity;
+            }
+        }
+
+        function identity(v) {
+            return v;
+        }
+
+        function F2C(v) {
+            return (v-32)/1.8;
+        }
+
+        function inHg2mbar(v) {
+            return 33.8638815*v;
         }
     }
 }());
