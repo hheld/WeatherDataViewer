@@ -27,13 +27,19 @@
             };
         }
 
-        weatherRestService.data('2014-08-30', '2014-08-31', $scope.quantity)
-//        weatherRestService.data(null, null, 'inHumidity')
+        weatherRestService.data('2014-08-30', '2014-09-30', $scope.quantity)
+//        weatherRestService.data(null, null, $scope.quantity)
             .then(function(data) {
-            var newData = [];
+            var newData = [],
+                conversionFunc = function(v) { return v; };
+
+            if(/temp/i.test($scope.quantity)) {
+                conversionFunc = function(v) { return (v-32)/1.8; };
+                $scope.plotOptions.ylabel = "Celsius";
+            }
 
             for(var i=0, len=data.data.timePoints.length; i<len; ++i) {
-                newData.push([new Date(data.data.timePoints[i]), data.data.dataPoints[i]]);
+                newData.push([new Date(data.data.timePoints[i]), conversionFunc(data.data.dataPoints[i])]);
             }
 
             $scope.plotData = newData;
