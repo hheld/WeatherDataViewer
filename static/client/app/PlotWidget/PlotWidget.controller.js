@@ -15,11 +15,13 @@
     function PlotWidgetController($scope, weatherRestService, unitService, $interval) {
         var vm = this;
 
-        vm.toDate           = new Date();
-        vm.fromDate         = new Date();
-        vm.update           = update;
-        vm.startAutoUpdate  = startAutoUpdate;
-        vm.stopAutoUpdate   = stopAutoUpdate;
+        vm.toDate                   = new Date();
+        vm.fromDate                 = new Date();
+        vm.update                   = update;
+        vm.startAutoUpdate          = startAutoUpdate;
+        vm.stopAutoUpdate           = stopAutoUpdate;
+        vm.enableAutoUpdate         = true;
+        vm.enableAutoUpdateToggled  = enableAutoUpdateToggled;
 
         var autoUpdate;
 
@@ -92,6 +94,14 @@
             if(angular.isDefined(autoUpdate)) {
                 $interval.cancel(autoUpdate);
                 autoUpdate = undefined;
+            }
+        }
+
+        function enableAutoUpdateToggled() {
+            if(vm.enableAutoUpdate) {
+                startAutoUpdate();
+            } else {
+                stopAutoUpdate();
             }
         }
     }
