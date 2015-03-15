@@ -24,7 +24,7 @@
         // ####################################################################
 
         function link(scope, element, attr) {
-            var graphEl = element[0].querySelector('#chart'),//element.find('div'),
+            var graphEl = element[0].querySelector('#chart'),
                 g;
 
             if(graphEl) {
