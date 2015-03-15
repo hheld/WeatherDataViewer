@@ -27,25 +27,29 @@
                 rangeSelectorPlotFillColor: '#575df5',
                 rangeSelectorPlotStrokeColor: '#676877'
             };
+
+            getData('2014-08-30', '2014-09-30');
         }
 
-        weatherRestService.data('2014-08-30', '2014-09-30', $scope.quantity)
-//        weatherRestService.data(null, null, $scope.quantity)
-            .then(function(data) {
-            var newData = [],
-                conversionFunc = function(v) { return v; };
+        function getData(from, to) {
+            var quantity = $scope.quantity;
 
-            if(/temp/i.test($scope.quantity)) {
-                conversionFunc = function(v) { return (v-32)/1.8; };
-            }
+            weatherRestService.data(from, to, quantity)
+                .then(function(data) {
+                var newData = [],
+                    conversionFunc = function(v) { return v; };
 
-            for(var i=0, len=data.data.timePoints.length; i<len; ++i) {
-                newData.push([new Date(data.data.timePoints[i]), conversionFunc(data.data.dataPoints[i])]);
-            }
+                if(/temp/i.test(quantity)) {
+                    conversionFunc = function(v) { return (v-32)/1.8; };
+                }
 
-            $scope.plotData = newData;
-            $scope.plotOptions.ylabel = unitService.unit($scope.quantity);
+                for(var i=0, len=data.data.timePoints.length; i<len; ++i) {
+                    newData.push([new Date(data.data.timePoints[i]),    conversionFunc(data.data.dataPoints[i])]);
+                }
+
+                $scope.plotData = newData;
+                $scope.plotOptions.ylabel = unitService.unit(quantity);
         });
-
+        }
     }
 }());
