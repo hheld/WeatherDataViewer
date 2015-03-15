@@ -18,12 +18,15 @@
             var newData = [];
 
             for(var i=0, len=data.data.timePoints.length; i<len; ++i) {
-                //newData.push([data.data.timePoints[i], data.data.inHumidity[i]]);
                 newData.push([new Date(data.data.timePoints[i]), data.data.inHumidity[i]]);
             }
 
             $scope.plotData = newData;
         });
+
+        $scope.plotOptions = {
+            showRangeSelector: true
+        };
 
         // ####################################################################
     }
