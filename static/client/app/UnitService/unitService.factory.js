@@ -19,9 +19,11 @@
         function unit(quantity) {
             switch(quantity) {
                 case 'inTemp':
-                    return 'Celsius';
+                    return '°C';
                 case 'inHumidity':
                     return '%';
+                case 'outTemp':
+                    return '°C';
                 default:
                     return '';
             }
