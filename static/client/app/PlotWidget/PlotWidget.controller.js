@@ -57,6 +57,9 @@
 
                 $scope.plotData = newData;
                 $scope.plotOptions.ylabel = unitService.unit(quantity);
+
+                vm.max = conversionFunc(Math.max.apply(null, data.data.dataPoints));
+                vm.min = conversionFunc(Math.min.apply(null, data.data.dataPoints));
             });
         }
 

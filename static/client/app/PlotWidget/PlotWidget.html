@@ -20,9 +20,19 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" class="btn btn-info btn-lg btn-block" ng-click="ctrl.update()">Update</button>
+                        <button type="button" class="btn btn-info btn-sm btn-block" ng-click="ctrl.update()">Update</button>
                     </div>
                 </div>
+                <table class="table" ng-show="ctrl.min && ctrl.max">
+                    <tr class="info">
+                        <th class="text-center"><small>Minimum</small></th>
+                        <th class="text-center"><small>Maximum</small></th>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><small>{{ctrl.min | number: 2}}</small></td>
+                        <td class="text-center"><small>{{ctrl.max | number: 2}}</small></td>
+                    </tr>
+                </table>
             </form>
         </div>
     </div>
