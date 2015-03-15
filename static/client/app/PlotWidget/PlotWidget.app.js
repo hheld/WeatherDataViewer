@@ -4,5 +4,6 @@
     'use strict';
 
     angular.module('plotWidget',
-                   ['weatherRestService']);
+                   ['weatherRestService',
+                    'unitService']);
 }());

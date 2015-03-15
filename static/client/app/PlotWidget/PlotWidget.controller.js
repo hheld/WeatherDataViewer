@@ -7,9 +7,11 @@
         .module('plotWidget')
         .controller('PlotWidgetController', PlotWidgetController);
 
-    PlotWidgetController.$inject = ['$scope', 'weatherRestService'];
+    PlotWidgetController.$inject = ['$scope',
+                                    'weatherRestService',
+                                    'unitService'];
 
-    function PlotWidgetController($scope, weatherRestService) {
+    function PlotWidgetController($scope, weatherRestService, unitService) {
         var vm = this;
 
         init();
@@ -35,7 +37,6 @@
 
             if(/temp/i.test($scope.quantity)) {
                 conversionFunc = function(v) { return (v-32)/1.8; };
-                $scope.plotOptions.ylabel = "Celsius";
             }
 
             for(var i=0, len=data.data.timePoints.length; i<len; ++i) {
@@ -43,6 +44,7 @@
             }
 
             $scope.plotData = newData;
+            $scope.plotOptions.ylabel = unitService.unit($scope.quantity);
         });
 
     }

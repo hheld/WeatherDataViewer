@@ -5,5 +5,6 @@
 
     angular.module('weatherData',
                   ['plotWidget',
-                   'weatherRestService']);
+                   'weatherRestService',
+                   'unitService']);
 }());
