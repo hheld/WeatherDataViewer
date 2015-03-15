@@ -9,14 +9,19 @@
 
     PlotWidgetController.$inject = ['$scope',
                                     'weatherRestService',
-                                    'unitService'];
+                                    'unitService',
+                                    '$interval'];
 
-    function PlotWidgetController($scope, weatherRestService, unitService) {
+    function PlotWidgetController($scope, weatherRestService, unitService, $interval) {
         var vm = this;
 
-        vm.toDate   = new Date();
-        vm.fromDate = new Date();
-        vm.update   = update;
+        vm.toDate           = new Date();
+        vm.fromDate         = new Date();
+        vm.update           = update;
+        vm.startAutoUpdate  = startAutoUpdate;
+        vm.stopAutoUpdate   = stopAutoUpdate;
+
+        var autoUpdate;
 
         init();
 
@@ -36,6 +41,11 @@
 
             vm.fromDate.setTime(vm.toDate.getTime() - 24*3600*1000);
             update();
+            startAutoUpdate();
+
+            $scope.$on('$destroy', function() {
+                stopAutoUpdate();
+            });
         }
 
         function getData(from, to) {
@@ -65,6 +75,24 @@
 
         function update() {
             getData(vm.fromDate.toISOString(), vm.toDate.toISOString());
+        }
+
+        function startAutoUpdate() {
+            if(angular.isDefined(autoUpdate)) return;
+
+            // get new data every 5 minutes
+            autoUpdate = $interval(function() {
+                vm.toDate = new Date();
+                vm.toDate.setMilliseconds(0);
+                update();
+            }, 5*60*1000);
+        }
+
+        function stopAutoUpdate() {
+            if(angular.isDefined(autoUpdate)) {
+                $interval.cancel(autoUpdate);
+                autoUpdate = undefined;
+            }
         }
     }
 }());
