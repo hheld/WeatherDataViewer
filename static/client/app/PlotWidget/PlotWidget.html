@@ -1,1 +1,29 @@
-<div id="chart" style="width: 100%"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading">{{quantity}}</div>
+    <div class="container-fluid panel-body">
+        <div class="row">
+            <div class="chartContainer col-xs-8">
+                <div id="chart" style="width: 100%"></div>
+            </div>
+            <form class="form-horizontal col-xs-4 jumbotron">
+                <div class="form-group">
+                    <label for="inputFromDate" class="col-sm-2 control-label">From</label>
+                    <div class="col-sm-10">
+                        <input type="datetime-local" class="form-control" id="inputFromData" ng-model=ctrl.fromDate>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputToDate" class="col-sm-2 control-label">To</label>
+                    <div class="col-sm-10">
+                        <input type="datetime-local" class="form-control" id="inputToData" ng-model=ctrl.toDate>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="ctrl.update()">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

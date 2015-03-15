@@ -14,6 +14,10 @@
     function PlotWidgetController($scope, weatherRestService, unitService) {
         var vm = this;
 
+        vm.toDate   = new Date();
+        vm.fromDate = new Date();
+        vm.update   = update;
+
         init();
 
         // ####################################################################
@@ -28,7 +32,10 @@
                 rangeSelectorPlotStrokeColor: '#676877'
             };
 
-            getData('2014-08-30', '2014-09-30');
+            vm.toDate.setMilliseconds(0);
+
+            vm.fromDate.setTime(vm.toDate.getTime() - 24*3600*1000);
+            update();
         }
 
         function getData(from, to) {
@@ -36,6 +43,11 @@
 
             weatherRestService.data(from, to, quantity)
                 .then(function(data) {
+                if(data.data.timePoints.length===0) {
+                    console.log('There is no data in the specified time frame for ' + quantity);
+                    return;
+                }
+
                 var newData = [],
                     conversionFunc = function(v) { return v; };
 
@@ -49,7 +61,11 @@
 
                 $scope.plotData = newData;
                 $scope.plotOptions.ylabel = unitService.unit(quantity);
-        });
+            });
+        }
+
+        function update() {
+            getData(vm.fromDate.toISOString(), vm.toDate.toISOString());
         }
     }
 }());

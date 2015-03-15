@@ -24,11 +24,11 @@
         // ####################################################################
 
         function link(scope, element, attr) {
-            var graphEl = element.find('div'),
+            var graphEl = element[0].querySelector('#chart'),//element.find('div'),
                 g;
 
             if(graphEl) {
-                g = new Dygraph(graphEl[0], [[0, 0]], {
+                g = new Dygraph(graphEl, [[0, 0]], {
                     labels: ['Time', scope.quantity]
                 });
             }
