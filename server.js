@@ -4,8 +4,10 @@ var express     = require('express'),
     app         = express(),
     bodyParser  = require('body-parser'),
     port        = process.env.PORT || 8080,
-    routes      = require('./routes');
+    routes      = require('./routes'),
+    morgan      = require('morgan');
 
+app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
