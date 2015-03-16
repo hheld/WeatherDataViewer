@@ -3,5 +3,8 @@
 (function () {
     'use strict';
 
-    angular.module('unitService', []);
+    angular.module('unitService', [])
+        .config(['$compileProvider', function($compileProvider) {
+            $compileProvider.debugInfoEnabled(false);
+        }]);
 })();

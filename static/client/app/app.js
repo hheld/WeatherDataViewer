@@ -6,5 +6,8 @@
     angular.module('weatherData',
                   ['plotWidget',
                    'weatherRestService',
-                   'unitService']);
+                   'unitService'])
+        .config(['$compileProvider', function($compileProvider) {
+            $compileProvider.debugInfoEnabled(false);
+        }]);
 }());

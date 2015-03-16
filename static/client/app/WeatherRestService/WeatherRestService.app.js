@@ -3,5 +3,8 @@
 (function () {
     'use strict';
 
-    angular.module('weatherRestService', []);
+    angular.module('weatherRestService', [])
+        .config(['$compileProvider', function($compileProvider) {
+            $compileProvider.debugInfoEnabled(false);
+        }]);
 })();
