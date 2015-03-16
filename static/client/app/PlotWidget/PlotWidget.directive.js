@@ -48,7 +48,7 @@
 
                 g.updateOptions(plotOptions);
                 g.resetZoom();
-            }, true);
+            }, false);
         }
     }
 })();
