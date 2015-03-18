@@ -81,7 +81,7 @@
                     vm.overallStatisticName = overallStatistics.name;
                     var statsValue = conversionFunc(overallStatistics.func(data.data.dataPoints));
 
-                    if(statsValue) {
+                    if(statsValue!==null) {
                         vm.overallStatistic = statsValue;
                     } else {
                         vm.overallStatistic = undefined;
