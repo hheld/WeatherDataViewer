@@ -23,10 +23,14 @@
                     return '°C';
                 case 'inHumidity':
                     return '%';
+                case 'outHumidity':
+                    return '%';
                 case 'outTemp':
                     return '°C';
                 case 'barometer':
                     return 'mbar';
+                case 'rain':
+                    return 'mm';
                 default:
                     return '';
             }
@@ -40,6 +44,8 @@
                     return F2C;
                 case 'barometer':
                     return inHg2mbar;
+                case 'rain':
+                    return in2mm;
                 default:
                     return identity;
             }
@@ -55,6 +61,10 @@
 
         function inHg2mbar(v) {
             return 33.8638815*v;
+        }
+
+        function in2mm(v) {
+            return v*2.54*10;
         }
     }
 }());

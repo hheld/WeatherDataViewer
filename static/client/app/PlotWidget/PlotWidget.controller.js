@@ -22,6 +22,8 @@
         vm.stopAutoUpdate           = stopAutoUpdate;
         vm.enableAutoUpdate         = true;
         vm.enableAutoUpdateToggled  = enableAutoUpdateToggled;
+        vm.min                      = undefined;
+        vm.max                      = undefined;
 
         var autoUpdate;
 

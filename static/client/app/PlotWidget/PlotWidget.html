@@ -32,7 +32,7 @@
                         <button type="button" class="btn btn-info btn-sm btn-block" ng-click="ctrl.update()">Update</button>
                     </div>
                 </div>
-                <table class="table" ng-show="ctrl.min && ctrl.max">
+                <table class="table" ng-show="ctrl.min!==undefined && ctrl.max!==undefined">
                     <tr class="info">
                         <th class="text-center"><small>Minimum</small></th>
                         <th class="text-center"><small>Maximum</small></th>
