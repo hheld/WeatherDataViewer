@@ -6,11 +6,15 @@
     <link rel="stylesheet" href="/3rdParty/bootstrap/dist/css/bootstrap.min.css" type="text/css">
 </head>
 <body>
-    <div class="container">
-        <plot-widget class="plotWidget" quantity="'inTemp'"></plot-widget>
-        <plot-widget class="plotWidget" quantity="'outTemp'"></plot-widget>
-        <plot-widget class="plotWidget" quantity="'barometer'"></plot-widget>
-        <plot-widget class="plotWidget" quantity="'inHumidity'"></plot-widget>
+    <div class="container-fluid">
+        <div class="row">
+            <plot-widget class="plotWidget col-md-6" quantity="'inTemp'"></plot-widget>
+            <plot-widget class="plotWidget col-md-6" quantity="'outTemp'"></plot-widget>
+        </div>
+        <div class="row">
+            <plot-widget class="plotWidget col-md-6" quantity="'barometer'"></plot-widget>
+            <plot-widget class="plotWidget col-md-6" quantity="'inHumidity'"></plot-widget>
+        </div>
     </div>
 
     <script src="/3rdParty/angular/angular.min.js"></script>
