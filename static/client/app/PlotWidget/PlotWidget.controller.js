@@ -39,9 +39,7 @@
                 color: 'rgb(42, 101, 212)',
                 gridLineColor: 'rgb(200, 200, 200)',
                 rangeSelectorPlotFillColor: '#575df5',
-                rangeSelectorPlotStrokeColor: '#676877',
-                rollPeriod: 1,
-                showRoller: true
+                rangeSelectorPlotStrokeColor: '#676877'
             };
 
             vm.toDate.setMilliseconds(0);
