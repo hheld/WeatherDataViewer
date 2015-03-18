@@ -36,10 +36,12 @@
                     <tr class="info">
                         <th class="text-center"><small>Minimum</small></th>
                         <th class="text-center"><small>Maximum</small></th>
+                        <th class="text-center" ng-show="ctrl.overallStatistic!==undefined"><small>{{ctrl.overallStatisticName}}</small></th>
                     </tr>
                     <tr>
                         <td class="text-center"><small>{{ctrl.min | number: 2}}</small></td>
                         <td class="text-center"><small>{{ctrl.max | number: 2}}</small></td>
+                        <td class="text-center" ng-show="ctrl.overallStatistic!==undefined"><small>{{ctrl.overallStatistic | number: 2}}</small></td>
                     </tr>
                 </table>
             </form>

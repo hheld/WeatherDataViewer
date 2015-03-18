@@ -12,7 +12,8 @@
     function UnitService () {
         return {
             unit: unit,
-            conversion: conversion
+            conversion: conversion,
+            overallStatistic: overallStatistic
         };
 
         // ####################################################################
@@ -51,6 +52,25 @@
             }
         }
 
+        function overallStatistic(quantity) {
+            switch(quantity) {
+                case 'inTemp':
+                    return { name: 'Avg.', func: avg };
+                case 'inHumidity':
+                    return { name: 'Avg.', func: avg };
+                case 'outHumidity':
+                    return { name: 'Avg.', func: avg };
+                case 'outTemp':
+                    return { name: 'Avg.', func: avg };
+                case 'barometer':
+                    return { name: 'Avg.', func: avg };
+                case 'rain':
+                    return { name: 'Sum', func: sum };
+                default:
+                    return null;
+            }
+        }
+
         function identity(v) {
             return v;
         }
@@ -65,6 +85,27 @@
 
         function in2mm(v) {
             return v*2.54*10;
+        }
+
+        function sum(v) {
+            var s = 0.0;
+
+            for(var i=0, len=v.length; i<len; ++i) {
+                s += v[i];
+            }
+
+            return s;
+        }
+
+        function avg(v) {
+            var len = v.length,
+                s = sum(v);
+
+            if(len>0) {
+                return s / len;
+            } else {
+                return null;
+            }
         }
     }
 }());

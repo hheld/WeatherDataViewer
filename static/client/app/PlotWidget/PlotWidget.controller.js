@@ -24,6 +24,7 @@
         vm.enableAutoUpdateToggled  = enableAutoUpdateToggled;
         vm.min                      = undefined;
         vm.max                      = undefined;
+        vm.overallStatistic         = undefined;
 
         var autoUpdate;
 
@@ -63,7 +64,8 @@
                 }
 
                 var newData = [],
-                    conversionFunc = unitService.conversion(quantity);
+                    conversionFunc = unitService.conversion(quantity),
+                    overallStatistics = unitService.overallStatistic(quantity);
 
                 for(var i=0, len=data.data.timePoints.length; i<len; ++i) {
                     newData.push([new Date(data.data.timePoints[i]), conversionFunc(data.data.dataPoints[i])]);
@@ -74,6 +76,19 @@
 
                 vm.max = conversionFunc(Math.max.apply(null, data.data.dataPoints));
                 vm.min = conversionFunc(Math.min.apply(null, data.data.dataPoints));
+
+                if(overallStatistics) {
+                    vm.overallStatisticName = overallStatistics.name;
+                    var statsValue = conversionFunc(overallStatistics.func(data.data.dataPoints));
+
+                    if(statsValue) {
+                        vm.overallStatistic = statsValue;
+                    } else {
+                        vm.overallStatistic = undefined;
+                    }
+                } else {
+                    vm.overallStatistic = undefined;
+                }
             });
         }
 
