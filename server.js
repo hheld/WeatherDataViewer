@@ -11,9 +11,9 @@ app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/api', routes);
-app.use('/static', express.static(__dirname + '/static/dist'));
-app.use('/3rdParty', express.static(__dirname + '/bower_components'));
+app.use('/wd/api', routes);
+app.use('/wd', express.static(__dirname + '/static/dist'));
+app.use('/wd/3rdParty', express.static(__dirname + '/bower_components'));
 
 app.listen(port);
 console.log('Started server on port ' + port);
