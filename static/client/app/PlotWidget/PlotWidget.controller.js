@@ -40,7 +40,7 @@
                 gridLineColor: 'rgb(200, 200, 200)',
                 rangeSelectorPlotFillColor: '#575df5',
                 rangeSelectorPlotStrokeColor: '#676877',
-                rollPeriod: 14,
+                rollPeriod: 1,
                 showRoller: true
             };
 
