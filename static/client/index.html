@@ -8,9 +8,6 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <wind-rose class="col-md-12" quantity="'windDir'"></wind-rose>
-        </div>
-        <div class="row">
             <plot-widget class="plotWidget col-md-6" quantity="'inTemp'"></plot-widget>
             <plot-widget class="plotWidget col-md-6" quantity="'outTemp'"></plot-widget>
         </div>
@@ -22,6 +19,9 @@
         <div class="row">
             <plot-widget class="plotWidget col-md-6" quantity="'outHumidity'"></plot-widget>
             <plot-widget class="plotWidget col-md-6" quantity="'inHumidity'"></plot-widget>
+        </div>
+        <div class="row">
+            <wind-rose class="col-md-6" quantity="'windDir'"></wind-rose>
         </div>
     </div>
 

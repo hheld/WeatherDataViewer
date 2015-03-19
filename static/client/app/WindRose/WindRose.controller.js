@@ -36,8 +36,6 @@
 
             startAutoUpdate();
 
-            $scope.val = [0, 90, 0, 0, 270, 90, 90, 0, 270];
-
             $scope.$on('$destroy', function() {
                 stopAutoUpdate();
             });
@@ -53,6 +51,8 @@
                 }
 
                 var conversionFunc = unitService.conversion(quantity);
+
+                $scope.val = data.data.dataPoints;
             });
         }
 

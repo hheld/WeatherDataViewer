@@ -33,13 +33,15 @@
             .attr("width", width + margin)
             .attr("height", height + margin);
 
-            var angles = d3.scale.linear()
+            var anglesSectors = d3.scale.linear()
                                     .domain([0, 16])
                                     .range([0, 360]);
 
-            var percentages = d3.scale.linear()
-                                        .domain([0, 4])
-                                        .range([0, 100]);
+            var anglesData = d3.scale.linear()
+                                    .domain([0, 16])
+                                    .range([11.25, 360]);
+
+            var maxPercentage = -1;
 
             scope.$watch('val', updateValues);
 
@@ -51,22 +53,26 @@
                 }
 
                 var numOfValues = newVal.length,
-                    tickValues = d3.range(17).map(angles),
+                    tickValues = d3.range(17).map(anglesData),
                     data = d3.layout.histogram().bins(tickValues)(newVal);
 
-                // data arcs ##################################################
-                vis.append("g")
-                    .selectAll("path")
-                    .data(data)
-                    .enter()
-                    .append("path")
-                    .attr("d", dataArc())
-                    .style("fill", function(d) {
-                        return "rgba(0, 128, 0, 0.63)";
-                    })
-                    .attr("transform", "translate(" + (margin+width)/2 + "," + (margin+height)/2 + ")");
-
                 // concentric circles denoting percentage #####################
+                maxPercentage = -1;
+
+                for(var i=0, len=data.length; i<len; ++i) {
+                    var percentage = data[i].y/numOfValues*100;
+
+                    if(percentage>maxPercentage) {
+                        maxPercentage = percentage;
+                    }
+                }
+
+                maxPercentage += 5;
+
+                var percentages = d3.scale.linear()
+                                            .domain([0, 4])
+                                            .range([0, maxPercentage]);
+
                 var percentageCircles       = d3.range(5).map(percentages),
                     concentricCirclesGroup  = vis.append("g");
 
@@ -76,7 +82,7 @@
                     .append("circle")
                     .attr("cx", 0)
                     .attr("cy", 0)
-                    .attr("r", function(d) { return d/100 * 0.5*width; })
+                    .attr("r", function(d) { return d/maxPercentage * 0.5*width; })
                     .attr("fill", "none")
                     .attr("stroke", "rgba(126, 124, 132, 0.63)")
                     .attr("transform", "translate(" + (margin+width)/2 + "," + (margin+height)/2 + ")");
@@ -86,19 +92,19 @@
                     .enter()
                     .append("text")
                     .attr("x", function(d) {
-                        return (margin+width)/2 + d/100*0.5*width*Math.cos(-22.5*Math.PI/180);
+                        return (margin+width)/2 + d/maxPercentage*0.5*width*Math.cos(-22.5*Math.PI/180);
                     })
                     .attr("y", function(d) {
-                        return (margin+height)/2 + d/100*0.5*height*Math.sin(-22.5*Math.PI/180);
+                        return (margin+height)/2 + d/maxPercentage*0.5*height*Math.sin(-22.5*Math.PI/180);
                     })
                     .attr("fill", "#5e85ed")
                     .text(function(d) {
-                        return '' + d + '%';
+                        return '' + d.toFixed(2) + '%';
                     });
                 // ############################################################
 
                 // the 16 sectors and their direction denotations #############
-                var sectors         = d3.range(17).map(angles),
+                var sectors         = d3.range(17).map(anglesSectors),
                     sectorsGroup    = vis.append("g");
 
                 sectorsGroup.selectAll("line")
@@ -141,24 +147,36 @@
                     });
                 // ############################################################
 
+                // data arcs ##################################################
+                vis.append("g")
+                    .selectAll("path")
+                    .data(data)
+                    .enter()
+                    .append("path")
+                    .attr("d", dataArc())
+                    .style("fill", function(d) {
+                        return "rgba(60, 60, 155, 0.65)";
+                    })
+                    .attr("transform", "translate(" + (margin+width)/2 + "," + (margin+height)/2 + ")");
+
                 function dataArc() {
                     return d3.svg.arc()
                         .innerRadius(function(d) {
-                        if(d.y>0) {
+                            if(d.y>0) {
+                                return 0;
+                            }
+
                             return 0;
-                        }
-
-                        return 0;
-                    })
+                        })
                         .outerRadius(function(d) {
-                        if(d.y>0) {
-                            return d.y/numOfValues*(width / 2 - 30);
-                        }
+                            if(d.y>0) {
+                                return d.y/numOfValues*(width/2)*100/maxPercentage;
+                            }
 
-                        return 0;
+                            return 0;
                     })
-                        .startAngle(function(d) { return d.x * Math.PI/180; })
-                        .endAngle(function(d) { return (d.x - d.dx) * Math.PI/180; });
+                    .startAngle(function(d) { return d.x * Math.PI/180; })
+                    .endAngle(function(d) { return (d.x - d.dx) * Math.PI/180; });
                 }
             }
         }

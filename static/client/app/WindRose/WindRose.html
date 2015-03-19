@@ -1,2 +1,50 @@
-<p>{{quantity}}</p>
-<div id="chart"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading">{{quantity}}</div>
+    <div class="container-fluid panel-body">
+        <div class="row">
+            <div class="chartContainer col-md-8">
+                <div id="chart" style="width: 100%; margin-bottom: 10px"></div>
+            </div>
+            <form class="form-horizontal col-md-4">
+                <div class="form-group">
+                    <label for="inputFromDate" class="col-sm-2 control-label">From</label>
+                    <div class="col-sm-10">
+                        <input type="dateTime-local" class="form-control" id="inputFromData" ng-model=ctrl.fromDate>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputToDate" class="col-sm-2 control-label">To</label>
+                    <div class="col-sm-10">
+                        <input type="dateTime-local" class="form-control" id="inputToData" ng-model=ctrl.toDate>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model=ctrl.enableAutoUpdate ng-change="ctrl.enableAutoUpdateToggled()"> Auto update every 5 minutes
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-info btn-sm btn-block" ng-click="ctrl.update()">Update</button>
+                    </div>
+                </div>
+                <table class="table" ng-show="ctrl.min!==undefined && ctrl.max!==undefined">
+                    <tr class="info">
+                        <th class="text-center"><small>Minimum</small></th>
+                        <th class="text-center"><small>Maximum</small></th>
+                        <th class="text-center" ng-show="ctrl.overallStatistic!==undefined"><small>{{ctrl.overallStatisticName}}</small></th>
+                    </tr>
+                    <tr>
+                        <td class="text-center"><small>{{ctrl.min | number: 2}}</small></td>
+                        <td class="text-center"><small>{{ctrl.max | number: 2}}</small></td>
+                        <td class="text-center" ng-show="ctrl.overallStatistic!==undefined"><small>{{ctrl.overallStatistic | number: 2}}</small></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
