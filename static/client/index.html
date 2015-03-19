@@ -8,6 +8,9 @@
 <body>
     <div class="container-fluid">
         <div class="row">
+            <wind-rose class="col-md-12" quantity="'windDir'"></wind-rose>
+        </div>
+        <div class="row">
             <plot-widget class="plotWidget col-md-6" quantity="'inTemp'"></plot-widget>
             <plot-widget class="plotWidget col-md-6" quantity="'outTemp'"></plot-widget>
         </div>
@@ -24,6 +27,7 @@
 
     <script src="/wd/3rdParty/angular/angular.min.js"></script>
     <script src="/wd/3rdParty/dygraphs/dygraph-combined-dev.js"></script>
+    <script src="/wd/3rdParty/d3/d3.min.js"></script>
     <script src="/wd/WeatherData.min.js"></script>
 </body>
 </html>

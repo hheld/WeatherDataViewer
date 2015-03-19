@@ -5,6 +5,7 @@
 
     angular.module('weatherData',
                   ['plotWidget',
+                   'windRose',
                    'weatherRestService',
                    'unitService'])
         .config(['$compileProvider', function($compileProvider) {
