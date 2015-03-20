@@ -39,7 +39,7 @@
 
             var anglesData = d3.scale.linear()
                                     .domain([0, 16])
-                                    .range([11.25, 360]);
+                                    .range([0, 360]);
 
             var maxPercentage = -1;
 
@@ -52,9 +52,10 @@
                     return;
                 }
 
-                var numOfValues = newVal.length,
+                var actualValues = newVal.filter(function(val) { return val!==null; }),
+                    numOfValues = actualValues.length,
                     tickValues = d3.range(17).map(anglesData),
-                    data = d3.layout.histogram().bins(tickValues)(newVal);
+                    data = d3.layout.histogram().bins(tickValues)(actualValues);
 
                 // concentric circles denoting percentage #####################
                 maxPercentage = -1;
@@ -155,7 +156,7 @@
                     .append("path")
                     .attr("d", dataArc())
                     .style("fill", function(d) {
-                        return "rgba(60, 60, 155, 0.65)";
+                        return "rgba(50, 201, 73, 0.65)";
                     })
                     .attr("transform", "translate(" + (margin+width)/2 + "," + (margin+height)/2 + ")")
                     .append("title").text(function(d) {
