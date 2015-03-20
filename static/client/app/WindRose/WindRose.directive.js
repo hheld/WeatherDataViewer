@@ -43,7 +43,7 @@
 
             var maxPercentage = -1;
 
-            scope.$watch('val', updateValues);
+            scope.$watch('val', updateValues, false);
 
             function updateValues(newVal, oldVal) {
                 vis.selectAll('*').remove();
@@ -157,7 +157,10 @@
                     .style("fill", function(d) {
                         return "rgba(60, 60, 155, 0.65)";
                     })
-                    .attr("transform", "translate(" + (margin+width)/2 + "," + (margin+height)/2 + ")");
+                    .attr("transform", "translate(" + (margin+width)/2 + "," + (margin+height)/2 + ")")
+                    .append("title").text(function(d) {
+                        return (d.y/numOfValues*100).toFixed(2) + '%';
+                    });
 
                 function dataArc() {
                     return d3.svg.arc()
