@@ -32,6 +32,8 @@
                     return 'mbar';
                 case 'rain':
                     return 'mm';
+                case 'windSpeed':
+                    return 'm/s';
                 default:
                     return '';
             }
@@ -47,6 +49,8 @@
                     return inHg2mbar;
                 case 'rain':
                     return in2mm;
+                case 'windSpeed':
+                    return milesPerHour2mPerSec;
                 default:
                     return identity;
             }
@@ -66,6 +70,8 @@
                     return { name: 'Avg.', func: avg };
                 case 'rain':
                     return { name: 'Sum', func: sum };
+                case 'windSpeed':
+                    return { name: 'Avg.', func: avg };
                 default:
                     return null;
             }
@@ -85,6 +91,10 @@
 
         function in2mm(v) {
             return v*2.54*10;
+        }
+
+        function milesPerHour2mPerSec(v) {
+            return v * 1609.344 / 3600;
         }
 
         function sum(v) {
