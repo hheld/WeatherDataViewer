@@ -33,11 +33,7 @@
             .attr("width", width + margin)
             .attr("height", height + margin);
 
-            var anglesSectors = d3.scale.linear()
-                                    .domain([0, 16])
-                                    .range([0, 360]);
-
-            var anglesData = d3.scale.linear()
+            var angles = d3.scale.linear()
                                     .domain([0, 16])
                                     .range([0, 360]);
 
@@ -54,7 +50,7 @@
 
                 var actualValues = newVal.filter(function(val) { return val!==null; }),
                     numOfValues = actualValues.length,
-                    tickValues = d3.range(17).map(anglesData),
+                    tickValues = d3.range(17).map(angles),
                     data = d3.layout.histogram().bins(tickValues)(actualValues);
 
                 // concentric circles denoting percentage #####################
@@ -68,7 +64,7 @@
                     }
                 }
 
-                maxPercentage += 5;
+                maxPercentage += 0.5;
 
                 var percentages = d3.scale.linear()
                                             .domain([0, 4])
@@ -105,7 +101,7 @@
                 // ############################################################
 
                 // the 16 sectors and their direction denotations #############
-                var sectors         = d3.range(17).map(anglesSectors),
+                var sectors         = d3.range(17).map(angles),
                     sectorsGroup    = vis.append("g");
 
                 sectorsGroup.selectAll("line")
@@ -180,7 +176,7 @@
                             return 0;
                     })
                     .startAngle(function(d) { return d.x * Math.PI/180; })
-                    .endAngle(function(d) { return (d.x - d.dx) * Math.PI/180; });
+                    .endAngle(function(d) { return (d.x + d.dx) * Math.PI/180; });
                 }
             }
         }
