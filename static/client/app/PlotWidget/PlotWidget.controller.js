@@ -37,7 +37,6 @@
         function init() {
             $scope.plotOptions = {
                 showRangeSelector: true,
-                title: $scope.quantity,
                 color: 'rgb(42, 101, 212)',
                 gridLineColor: 'rgb(200, 200, 200)',
                 rangeSelectorPlotFillColor: '#575df5',
