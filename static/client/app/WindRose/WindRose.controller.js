@@ -22,6 +22,7 @@
         vm.stopAutoUpdate           = stopAutoUpdate;
         vm.enableAutoUpdate         = true;
         vm.enableAutoUpdateToggled  = enableAutoUpdateToggled;
+        vm.quantityName             = $scope.quantity;
 
         var autoUpdate;
 
@@ -33,6 +34,8 @@
         function init() {
             vm.toDate.setMilliseconds(0);
             vm.fromDate.setTime(vm.toDate.getTime() - 24*3600*1000);
+
+            vm.quantityName = unitService.userFriendlyNames($scope.quantity);
 
             startAutoUpdate();
 
@@ -49,8 +52,6 @@
                     console.log('There is no data in the specified time frame for ' + quantity);
                     return;
                 }
-
-                var conversionFunc = unitService.conversion(quantity);
 
                 $scope.val = data.data.dataPoints;
             });

@@ -25,10 +25,12 @@
         vm.min                      = undefined;
         vm.max                      = undefined;
         vm.overallStatistic         = undefined;
+        vm.quantityName             = $scope.quantity;
 
         var autoUpdate;
 
         init();
+        update();
 
         // ####################################################################
 
@@ -43,9 +45,9 @@
             };
 
             vm.toDate.setMilliseconds(0);
+            vm.quantityName = unitService.userFriendlyNames($scope.quantity);
 
             vm.fromDate.setTime(vm.toDate.getTime() - 24*3600*1000);
-            update();
             startAutoUpdate();
 
             $scope.$on('$destroy', function() {

@@ -11,9 +11,10 @@
 
     function UnitService () {
         return {
-            unit: unit,
-            conversion: conversion,
-            overallStatistic: overallStatistic
+            unit:               unit,
+            conversion:         conversion,
+            overallStatistic:   overallStatistic,
+            userFriendlyNames:  userFriendlyNames
         };
 
         // ####################################################################
@@ -74,6 +75,29 @@
                     return { name: 'Avg.', func: avg };
                 default:
                     return null;
+            }
+        }
+
+        function userFriendlyNames(quantity) {
+            switch(quantity) {
+                case 'inTemp':
+                    return 'Temperature inside';
+                case 'inHumidity':
+                    return 'Humidity inside';
+                case 'outHumidity':
+                    return 'Humidity outside';
+                case 'outTemp':
+                    return 'Temperature outside';
+                case 'barometer':
+                    return 'Barometer';
+                case 'rain':
+                    return 'Rain';
+                case 'windDir':
+                    return 'Wind direction frequency';
+                case 'windSpeed':
+                    return 'Wind speed';
+                default:
+                    return quantity;
             }
         }
 
