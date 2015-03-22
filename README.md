@@ -1,5 +1,5 @@
 # WeatherDataViewer
-Displays weather data collected in a weewx sqlite database in a nice web interface.
+Displays weather data collected in a weewx sqlite database in a nice web interface. This application also provides a REST api for data contained in the weewx sqlite database.
 
 # Prerequisites
 Make sure that ```weewx``` is set up and running: http://www.weewx.com/.
