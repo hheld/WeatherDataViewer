@@ -19,9 +19,14 @@
             link: link
         };
 
-        var width   = 400,
-            height  = 400,
-            margin  = 100;
+        var width   = 300,
+            height  = 300,
+            margin  = {
+                left: 50,
+                right: 50,
+                top: 50,
+                bottom: 50
+            };
 
         return setup;
 
@@ -29,9 +34,14 @@
 
         function link(scope, element, attr) {
             var vis = d3.select(element[0].querySelector('#chart'))
-            .append("svg")
-            .attr("width", width + margin)
-            .attr("height", height + margin);
+                        .append("svg")
+                            .attr("width", width + margin.left + margin.right)
+                            .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                            .attr("transform", "translate(" + (margin.left + width/2) + "," + (margin.top + height/2) + ")")
+                        .append("g")
+                            .call(d3.behavior.zoom().scaleExtent([1, 10]).on("zoom", zoom))
+                        .append("g");
 
             var angles = d3.scale.linear()
                                     .domain([0, 16])
@@ -43,6 +53,13 @@
 
             function updateValues(newVal, oldVal) {
                 vis.selectAll('*').remove();
+
+                vis.append("rect")
+                    .attr("class", "overlay")
+                    .attr("x", -width/2)
+                    .attr("y", -height/2)
+                    .attr("width", width)
+                    .attr("height", height);
 
                 if(!newVal) {
                     return;
@@ -81,18 +98,17 @@
                     .attr("cy", 0)
                     .attr("r", function(d) { return d/maxPercentage * 0.5*width; })
                     .attr("fill", "none")
-                    .attr("stroke", "rgba(126, 124, 132, 0.63)")
-                    .attr("transform", "translate(" + (margin+width)/2 + "," + (margin+height)/2 + ")");
+                    .attr("stroke", "rgba(126, 124, 132, 0.63)");
 
                 concentricCirclesGroup.selectAll("text")
                     .data(percentageCircles)
                     .enter()
                     .append("text")
                     .attr("x", function(d) {
-                        return (margin+width)/2 + d/maxPercentage*0.5*width*Math.cos(-22.5*Math.PI/180);
+                        return d/maxPercentage*0.5*width*Math.cos(-22.5*Math.PI/180);
                     })
                     .attr("y", function(d) {
-                        return (margin+height)/2 + d/maxPercentage*0.5*height*Math.sin(-22.5*Math.PI/180);
+                        return d/maxPercentage*0.5*height*Math.sin(-22.5*Math.PI/180);
                     })
                     .attr("fill", "#5e85ed")
                     .text(function(d) {
@@ -108,14 +124,14 @@
                     .data(sectors)
                     .enter()
                     .append("line")
-                    .attr("x1", (margin+width)/2)
-                    .attr("x2", margin/2+width)
-                    .attr("y1", (margin+height)/2)
-                    .attr("y2", (margin+height)/2)
+                    .attr("x1", 0)
+                    .attr("x2", 0)
+                    .attr("y1", 0)
+                    .attr("y2", 0.5 * height)
                     .attr("stroke", "#93b6f7")
                     .attr("stroke-width", 0.3)
                     .attr("transform", function(d) {
-                        return 'rotate(' + d + ', ' + (margin+width)/2 + ', ' + (margin+height)/2 + ')';
+                        return 'rotate(' + d + ')';
                     });
 
                 sectorsGroup.selectAll("text")
@@ -131,10 +147,10 @@
                     .enter()
                     .append("text")
                     .attr("x", function(d) {
-                        return (margin+width)/2 + 0.55*width*Math.cos(-Math.PI/180*d.angle-Math.PI/2);
+                        return 0.55*width*Math.cos(-Math.PI/180*d.angle-Math.PI/2);
                     })
                     .attr("y", function(d) {
-                        return (margin+height)/2 + 0.55*height*Math.sin(-Math.PI/180*d.angle-Math.PI/2);
+                        return 0.55*height*Math.sin(-Math.PI/180*d.angle-Math.PI/2);
                     })
                     .attr("fill", "#4a5980")
                     .attr("dy", "0.35em")
@@ -154,7 +170,6 @@
                     .style("fill", function(d) {
                         return "rgba(50, 201, 73, 0.65)";
                     })
-                    .attr("transform", "translate(" + (margin+width)/2 + "," + (margin+height)/2 + ")")
                     .append("title").text(function(d) {
                         return (d.y/numOfValues*100).toFixed(2) + '%';
                     });
@@ -178,6 +193,10 @@
                     .startAngle(function(d) { return d.x * Math.PI/180; })
                     .endAngle(function(d) { return (d.x + d.dx) * Math.PI/180; });
                 }
+            }
+
+            function zoom() {
+                vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
             }
         }
     }
