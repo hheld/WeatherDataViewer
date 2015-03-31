@@ -35,6 +35,8 @@
                     return 'mm';
                 case 'windSpeed':
                     return 'm/s';
+                case 'windGust':
+                    return 'm/s';
                 default:
                     return '';
             }
@@ -51,6 +53,8 @@
                 case 'rain':
                     return in2mm;
                 case 'windSpeed':
+                    return milesPerHour2mPerSec;
+                case 'windGust':
                     return milesPerHour2mPerSec;
                 default:
                     return identity;
@@ -72,6 +76,8 @@
                 case 'rain':
                     return { name: 'Sum', func: sum };
                 case 'windSpeed':
+                    return { name: 'Avg.', func: avg };
+                case 'windGust':
                     return { name: 'Avg.', func: avg };
                 default:
                     return null;
@@ -96,6 +102,10 @@
                     return 'Wind direction frequency';
                 case 'windSpeed':
                     return 'Wind speed';
+                case 'windGustDir':
+                    return 'Wind gust direction frequency';
+                case 'windGust':
+                    return 'Wind gust speed';
                 default:
                     return quantity;
             }
