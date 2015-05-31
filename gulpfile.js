@@ -1,7 +1,8 @@
 /* jshint node: true */
 
-var gulp    = require('gulp'),
-    uglify  = require('gulp-uglifyjs');
+var gulp   = require('gulp'),
+    uglify = require('gulp-uglify'),
+    concat = require('gulp-concat');
 
 gulp.task('brackets-onsave', ['uglify', 'distributeHtml', 'distributeCss']);
 
@@ -13,7 +14,8 @@ gulp.task('watch', function() {
 
 gulp.task('uglify', function () {
     gulp.src(['static/client/**/*.js'])
-        .pipe(uglify('WeatherData.min.js'))
+        .pipe(uglify())
+        .pipe(concat('WeatherData.min.js'))
         .on('error', swallowError)
         .pipe(gulp.dest('static/dist'));
 });
